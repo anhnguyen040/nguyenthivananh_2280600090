@@ -104,4 +104,4 @@ Participating in the FCAJ Community Day was an incredibly valuable and insightfu
 - Always design with variance, security, and auditability in mind, especially in high-stakes applications. 
 
 #### Some event photos
-<img src="{{ "images/event1.jpg" | relURL }}">
+![Nguyen Thi Van Anh](./images/event1.jpg)
