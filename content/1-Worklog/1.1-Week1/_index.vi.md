@@ -24,6 +24,5 @@ pre: " <b> 1.1. </b> "
 * Hiểu rõ lộ trình và cách báo cáo.
 * Nắm vững khái niệm Cloud Computing và các dịch vụ cốt lõi AWS (IAM, S3, EC2...).
 * Tạo tài khoản AWS và cấu hình bảo mật ban đầu.
-![Nguyen Thi Van Anh](/images/1-Worklog/week1.1.png)
-
-![Nguyen Thi Van Anh](/images/1-Worklog/week1.2.png)
+<img src="{{ "images/1-Worklog/week1.1.png | relURL }}">
+<img src="{{ "images/1-Worklog/week1.2.png | relURL }}">

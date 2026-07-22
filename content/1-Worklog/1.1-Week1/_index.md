@@ -26,5 +26,5 @@ pre: " <b> 1.1. </b> "
 - Gained a clear understanding of the internship roadmap and reporting procedures.
 - Acquired foundational knowledge of Cloud Computing and core AWS services, including IAM, Amazon S3, Amazon EC2, and Amazon RDS.
 - Created an AWS account and completed the initial security configuration following AWS security best practices.
-![Nguyen Thi Van Anh](/images/1-Worklog/week1.1.png)
-![Nguyen Thi Van Anh](/images/1-Worklog/week1.2.png)
+<img src="{{ "images/1-Worklog/week1.1.png | relURL }}">
+<img src="{{ "images/1-Worklog/week1.2.png | relURL }}">

@@ -24,5 +24,5 @@ pre: " <b> 1.5. </b> "
 * Designed a complete database schema for the internship management system (users, reports, tasks, scores, check-ins tables). 
 * Successfully connected EC2 to RDS in a secure private subnet environment. 
 * Gained the ability to perform necessary database operations for the project, ready to store intern information.
-![Nguyen Thi Van Anh](/images/1-Worklog/week5.1.png)
-![Nguyen Thi Van Anh](/images/1-Worklog/week5.2.png)
+<img src="{{ "images/1-Worklog/week5.1.png | relURL }}">
+<img src="{{ "images/1-Worklog/week5.2.png | relURL }}">
