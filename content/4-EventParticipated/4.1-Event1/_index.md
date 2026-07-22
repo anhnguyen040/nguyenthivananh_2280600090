@@ -1,29 +1,29 @@
 ---
 title: "Event 1"
-date: 2024-01-01
+date: 2026-05-23
+location: Floor 36, Bitexco Financial tower
+role: Attendee
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
-
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Summary Report: “FCAJ Community Day”
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- The FCAJ Community Day aimed to explore modern Agentic AI, Cloud Architecture, and Enterprise-Grade System Design, connecting cutting-edge technology with practical business applications through expert sessions and workshops.
+- Learned about Amazon Quick Suite, CloudFront as a foundation, non-determinism in LLMs, and the power of multi-agent systems for complex problems like startup credit scoring.
+- Understood when to use single vs multi-agent architectures, the importance of guardrails, security, compliance, and how to move AI solutions from POC to production.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **Tinh Truong** - Platform Engiiner, GoTymeX
+- **Pham Nguyen Hai Anh** - G-AsiaPacific Vietnam, AWS Community Builder
+- **Nguyen Tuan Thinh** - DevOps Engineer, First Cloud AI Journey
+- **UTMorpho** - Team VIB LotusHacks 2026
+- **Duc Dao** - Solution Architect - Cloud Kinetics
+- **Vy Lam** - Senior Business Systems Analyst VPBank
 
 ### Key Highlights
 
@@ -32,95 +32,77 @@ pre: " <b> 4.1. </b> "
 - Long product release cycles → Lost revenue/missed opportunities  
 - Inefficient operations → Reduced productivity, higher costs  
 - Non-compliance with security regulations → Security breaches, loss of reputation  
+- Context engineering is becoming a core future skill.
 
-#### Transitioning to modern application architecture – Microservices
+#### Friendly AI assistant with Amazon quick
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+- Business users often face a painful daily routine: gathering information from multiple sources, consulting experts for analysis, and repeating time-consuming manual tasks.
+- AWS introduced Amazon Quick Suite, a new agentic AI solution designed for enterprises.
+- It creates a unified and friendly experience where people and AI agents collaborate seamlessly around the company’s entire knowledge base.
+- The suite offers powerful capabilities in Insights, BI, Automation, data connectors, and strong governance, with practical use cases such as the PM Assistant (auto MoM, email, scheduling). 
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+#### CloudFront as Your Foundation
 
-#### Domain-Driven Design (DDD)
+- Businesses struggle with unpredictable CDN costs, sudden bill spikes, complicated security management, and performance challenges in delivering content globally.
+- Amazon CloudFront is positioned as the foundation for modern web and application delivery, offering a unified solution that combines content delivery, security, reliability, and performance.
+- Key capabilities include predictable flat-rate pricing, global edge network, robust DDoS & WAF protection, origin cloaking, advanced caching, HTTP/3, and intelligent failover.
+- It supports various customer personas — from small website owners to large scaling businesses — with strong security (HTTPS, Mutual TLS, OAC) and cost optimization features.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
-
-#### Event-Driven Architecture
+#### 36 hrs with LotusHacks
 
 - **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
 - **Benefits**: Loose coupling, scalability, resilience  
 - **Sync vs async comparison**: Understanding the trade-offs  
 
-#### Compute Evolution
+#### Non-Determinism of "Deterministic" LLM Settings
+While LLMs generate text token-by-token through logits, softmax, and sampling, researchers discovered that even with identical prompts and temp=0, outputs can vary significantly due to floating-point arithmetic on GPUs and inference batching optimizations.
+- Temperature = 0 does not guarantee true determinism in real-world inference environments.
+- Non-determinism stems from GPU architecture and commercial inference optimizations.
+- Practical tips: Use temp=0.1 as a sweet spot, apply multiple runs with voting, structured outputs, and thorough testing.  
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+#### Enterprise-Grade Multi-Agent System - The Case of Startup Credit Scoring
+The presentation introduces an Enterprise-Grade Multi-Agent System for startup credit scoring. It starts by highlighting the structural mismatch between traditional banking credit systems (designed for established companies) and the multi-dimensional, unstructured nature of startup data.
+The speaker then explains why a single-agent approach is insufficient and proposes a multi-agent architecture — a “Virtual Credit Committee” consisting of specialized agents (Financial Analyst, Market Analyst, Team Evaluator, Risk Assessor, Compliance) coordinated by a Manager. This is followed by enterprise-grade considerations including security, guardrails, compliance, deployment architecture (using AWS Bedrock AgentCore, ECR, API Gateway), and a compelling ROI analysis.
 
 ### Key Takeaways
 
-#### Design Mindset
+#### Mindset for working with AI
+- The mindset for working with AI is crucial; one must grasp the process and provide accurate information to achieve effective results.
+- High-quality input—rather than simply a large volume of data—is what ensures the output aligns with expectations.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+#### Friendly AI assistant 
+- Traditional workflows are inefficient.
+- Amazon Quick Suite enables friendly AI agents to accelerate insight-to-action in a secure enterprise environment.
 
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+#### LotusHacks
+- Collaboration is everything — Team synchronization and alignment matter most for success.
+- More ideas ≠ Better ideas — Beware of Scope Creep; adding too many features can overwhelm the project and reduce quality.
+#### Enterprise-Grade Multi-Agent System
+- Traditional single-agent systems fail on complex, multi-domain problems like startup credit assessment.
+- Multi-agent systems provide specialized expertise, better reasoning, auditability, and fault tolerance.
+- Moving from POC to production requires strong focus on security, guardrails, governance, and operational readiness.
+- Enterprise Al is not about making things work. It's about making them work securely, reliably, and at scale.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+Participating in the FCAJ Community Day was an incredibly valuable and insightful experience. It provided me with a comprehensive view of modern approaches in Agentic AI, Cloud Architecture, and Enterprise-Grade System Design.
 
 #### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+- Gained deep understanding of Amazon Quick Suite — a new agentic AI platform that enables seamless collaboration between humans and AI agents for enterprise workflows.
+- Explored Amazon CloudFront as a foundational service for secure, high-performance, and cost-optimized content delivery with strong global edge capabilities.
+- Discovered the surprising non-determinism in LLMs even with “deterministic” settings (temp=0), along with practical mitigation strategies.
+- Learned how to build Enterprise-Grade Multi-Agent Systems, demonstrated through a real-world Startup Credit Scoring use case.
 
 #### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
+- Understood when to use single-agent vs multi-agent architectures and how a “Virtual Credit Committee” with specialized agents delivers superior reasoning and auditability.
+- Recognized the importance of guardrails, security, compliance, and observability when moving AI solutions from POC to production.
+- Learned practical deployment patterns using AWS Bedrock AgentCore, ECR, Lambda, and API Gateway.    
 
 #### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
+- Modern enterprise AI is not just about making things work — it’s about making them work securely, reliably, and at scale.
+- Multi-agent systems are powerful for complex, multi-domain problems, but require strong architecture and enterprise thinking.
+- Always design with variance, security, and auditability in mind, especially in high-stakes applications. 
 
 #### Some event photos
-*Add your event photos here*  
+![Nguyen Thi Van Anh](/images/event1.jpg)
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.

@@ -1,125 +1,94 @@
 ---
 title: "Event 2"
-date: 2024-01-01
+date: 2026-06-13
+location: Floor 26, Bitexco Financial tower
+role: Attendee
 weight: 1
 chapter: false
-pre: " <b> 4.2. </b> "
+pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+# Bài thu hoạch “Meet up”
 
 ### Mục Đích Của Sự Kiện
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+- Khám phá các xu hướng hiện đại về Agentic AI, Cloud Architecture và thiết kế hệ thống cấp doanh nghiệp, kết nối công nghệ tiên tiến với ứng dụng thực tiễn qua các phiên chia sẻ chuyên sâu.
+- Hiểu về Amazon Quick Suite, CloudFront làm nền tảng, hiện tượng non-determinism của LLM, và sức mạnh của multi-agent system cho bài toán phức tạp như đánh giá tín dụng startup.
+- Biết khi nào dùng single-agent hay multi-agent, tầm quan trọng của guardrails, bảo mật, compliance và cách đưa AI từ POC lên production.
 
 ### Danh Sách Diễn Giả
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+- **Mr. Dat Pham** - Data Analytics Engineer, **Mr. Cường Nguyễn** - Process Engineer
+- **Trong H. Truong** - DevOps Engineer @ Endava Vietnam
+- **Danh Hoang Hieu Nghi** - AI Engineer – AWS Community Builder – AWS Student Builder Group Leader
+- **Dinh Trung Kien, Nguyen Minh Tho** 
 
 ### Nội Dung Nổi Bật
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+#### CÂU CHUYỆN THỰC TẾ ĐẾN VĂN HÓA TẠI TẬP ĐOÀN ĐA QUỐC GIA
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Vai trò của Data Analytics Engineer rất khác nhau tùy theo ngành nghề và mô hình kinh doanh. Qua các ví dụ thực tế từ Kamereo và Colgate-Palmolive, anh chia sẻ công việc hàng ngày như xây dựng báo cáo, dashboard, phân tích xu hướng kinh doanh, tối ưu vận hành bằng dữ liệu IoT và giải quyết vấn đề liên phòng ban.
+Bài chia sẻ cũng nhấn mạnh các kỹ năng cần thiết: tư duy phản biện, kể chuyện bằng dữ liệu, giải quyết vấn đề và giao tiếp hiệu quả. Đồng thời giới thiệu mô hình phát triển sự nghiệp cá nhân qua 5 giai đoạn (Follower → Learner → Problem Solver → System Thinker → Super Star) và chia sẻ về văn hóa làm việc tại tập đoàn đa quốc gia cùng quy trình tuyển dụng.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+#### What does a DevOps Engineer really do?
+Nhiều người nghĩ DevOps chỉ là viết pipeline CI/CD, quản lý Docker/Kubernetes hay là người deploy code và fix sự cố lúc nửa đêm. Thực tế, công việc của DevOps Engineer rộng hơn rất nhiều và thay đổi tùy theo quy mô công ty, cấu trúc đội ngũ và độ trưởng thành của hệ thống.
+Anh nhấn mạnh DevOps là sự kết hợp giữa văn hóa và cách làm việc, bao gồm on-call, xử lý incident, troubleshooting, tối ưu chi phí, hỗ trợ môi trường và giúp developer đưa code ra production một cách nhanh chóng, ổn định.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+#### From First Cloud AI Journey to AWS Partner
+Hành trình truyền cảm hứng từ một sinh viên tò mò với công nghệ Cloud đến trở thành đối tác AWS. Anh trình bày lộ trình 8 bước rõ ràng: bắt đầu từ sự tò mò, hành trình Cloud đầu tiên, tham gia workshop & cộng đồng, thực hành qua lab, áp dụng vào dự án trường học, xây dựng portfolio, hợp tác với AWS Partner và cuối cùng là chia sẻ, đóng góp lại cho cộng đồng.
+Bài chia sẻ cũng giới thiệu chương trình Student Community Day với hệ thống badge, điểm swag, voucher thi chứng chỉ AWS và AWS Credits để hỗ trợ và khuyến khích sinh viên.
+#### A scalable URL shortening service on AWS
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+Bài thuyết trình “A scalable URL shortening service on AWS” hướng dẫn cách thiết kế và xây dựng một dịch vụ rút gọn URL chuyên nghiệp, có khả năng mở rộng trên AWS. Bắt đầu từ luồng đơn giản (User → Frontend → Backend → Database), sau đó đi sâu vào kiến trúc mạnh mẽ với các thành phần chính:
 
-#### Domain-Driven Design (DDD)
+- Frontend: CloudFront + WAF + Amplify
+- Backend: Spring Boot trên ECS
+- Tạo key: Pre-generate short code bằng ECS + Redis (ElastiCache)
+- Lưu trữ: DynamoDB
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
-
-#### Event-Driven Architecture
-
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
-
-#### Amazon Q Developer
-
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+Kiến trúc tập trung vào việc tách biệt read/write, bảo mật ở lớp Edge, và sử dụng cache để tối ưu hiệu suất.
 
 ### Những Gì Học Được
 
-#### Tư Duy Thiết Kế
+#### CÂU CHUYỆN THỰC TẾ ĐẾN VĂN HÓA TẠI TẬP ĐOÀN ĐA QUỐC GIA
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+- Data Analytics Engineer không chỉ là “người làm báo cáo” mà là người giải quyết vấn đề kinh doanh bằng dữ liệu.
+- Kỹ năng chuyên môn phải kết hợp hài hòa với tư duy phản biện, giao tiếp và hiểu biết business.
+- Sự phát triển sự nghiệp nên tập trung vào việc nâng cao tư duy theo từng giai đoạn thay vì chỉ chạy theo chức danh.
 
-#### Kiến Trúc Kỹ Thuật
+#### What does a DevOps Engineer really do?
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+- DevOps không phải là một công cụ hay chức danh cụ thể, mà là văn hóa và cách làm việc kết nối Development và Operations.
+- Nền tảng vững chắc (Linux, networking, Git, containers, observability) quan trọng hơn việc chạy theo công cụ hot.
+- Một DevOps Engineer giỏi cần có tính tò mò, tư duy hệ thống, khả năng tự động hóa, giao tiếp tốt và tinh thần học hỏi liên tục.
+- Thành công đến từ việc hiểu “tại sao” trước “làm thế nào” và tập trung nâng cao hiệu quả cho cả đội ngũ thay vì làm anh hùng một mình.
 
-#### Chiến Lược Hiện Đại Hóa
+#### A scalable URL shortening service on AWS
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
+- Dịch vụ URL shortener đơn giản nhưng đòi hỏi kiến trúc tốt khi cần scale, an toàn và hiệu suất cao.
+- Sử dụng các dịch vụ managed của AWS giúp xây dựng hệ thống nhanh chóng, an toàn và dễ mở rộng.
+- Kiến trúc tốt cần tách biệt luồng đọc/ghi và đẩy bảo mật & cache gần với người dùng nhất có thể.
 ### Trải nghiệm trong event
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+Tham gia FCAJ Community Day là một trải nghiệm rất bổ ích và truyền cảm hứng. Sự kiện giúp tôi có cái nhìn toàn diện về các xu hướng hiện đại trong Agentic AI, Cloud Architecture và Enterprise-Grade System Design.
 
 #### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+- Hiểu rõ Amazon Quick Suite — nền tảng Agentic AI mới giúp con người và AI agents làm việc cộng tác hiệu quả trong môi trường doanh nghiệp.
+- Khám phá Amazon CloudFront như một nền tảng cốt lõi cho việc phân phối nội dung an toàn, hiệu suất cao và tối ưu chi phí.
+- Nhận ra hiện tượng non-determinism của LLM dù đã thiết lập “deterministic”, cùng các chiến lược giảm thiểu thực tế.
+- Học cách xây dựng Multi-Agent System cấp doanh nghiệp qua case study Startup Credit Scoring.
 
 #### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
-
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
+- Hiểu rõ sự khác biệt và trường hợp sử dụng single-agent vs multi-agent architecture.
+- Thấy rõ tầm quan trọng của guardrails, security, compliance và observability khi đưa AI từ POC lên production.
+- Học được các mô hình triển khai thực tế với Bedrock AgentCore, ECR, Lambda và API Gateway.
 
 #### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
+- Enterprise AI không chỉ là làm cho mọi thứ “chạy được”, mà phải làm cho chúng chạy an toàn, đáng tin cậy và mở rộng quy mô.
+- Multi-agent systems rất mạnh cho các bài toán phức tạp, đa lĩnh vực nhưng đòi hỏi kiến trúc tốt và tư duy cấp doanh nghiệp.
+- Luôn thiết kế hệ thống với nhận thức về sự biến thiên, bảo mật và khả năng kiểm toán, đặc biệt trong các ứng dụng quan trọng.
 
 #### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+![Nguyen Thi Van Anh](/images/event2.jpg)
+
