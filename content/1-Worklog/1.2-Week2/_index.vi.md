@@ -24,4 +24,5 @@ pre: " <b> 1.2. </b> "
 * Có khả năng thiết lập CloudFront Distribution để phân phối nội dung nhanh chóng, an toàn với HTTPS và caching tối ưu.
 * Hiểu rõ cách tích hợp S3 vào dự án để lưu trữ file PDF báo cáo của thực tập sinh.
 * Hoàn thành các bài thực hành upload và quản lý file, sẵn sàng hỗ trợ chức năng nộp báo cáo trong dự án.
-<img src="{{ "images/1-Worklog/week2.png | relURL }}">
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week2.png)
+

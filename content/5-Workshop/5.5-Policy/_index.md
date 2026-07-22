@@ -1,99 +1,217 @@
 ---
-title : "VPC Endpoint Policies"
-date : 2024-01-01
-weight : 5
-chapter : false
-pre : " <b> 5.5. </b> "
+title: "IAM Policies and Access Control"
+date: 2026-04-17
+weight: 5
+chapter: false
+pre: " <b> 5.5. </b> "
 ---
 
-When you create an interface or gateway endpoint, you can attach an endpoint policy to it that controls access to the service to which you are connecting. A VPC endpoint policy is an IAM resource policy that you attach to an endpoint. If you do not attach a policy when you create an endpoint, AWS attaches a default policy for you that allows full access to the service through the endpoint.
+#### IAM Policies and Access Control Configuration Report
 
-You can create a policy that restricts access to specific S3 buckets only. This is useful if you only want certain S3 Buckets to be accessible through the endpoint.
+This section documents the creation of IAM policies for the internship management system. IAM policies define granular permissions for users and applications to access AWS resources securely following the principle of least privilege.
 
-In this section you will create a VPC endpoint policy that restricts access to the S3 bucket specified in the VPC endpoint policy.
+#### Objective
 
-![endpoint diagram](/images/5-Workshop/5.5-Policy/s3-bucket-policy.png)
+The main objectives are:
 
-#### Connect to an EC2 instance and verify connectivity to S3
+- Define granular permissions for S3 bucket access
+- Configure RDS database connection permissions
+- Enable CloudWatch logging for monitoring
+- Implement SNS publish permissions for notifications
+- Enforce principle of least privilege
+- Enable compliance and audit logging
 
-1. Start a new AWS Session Manager session on the instance named Test-Gateway-Endpoint. From the session, verify that you can list the contents of the bucket you created in Part 1: Access S3 from VPC:
+#### Policy 1: S3 Access Policy for Application
 
-```
-aws s3 ls s3://\<your-bucket-name\>
-```
-![test](/images/5-Workshop/5.5-Policy/test1.png)
+**Policy Name:** `internship-app-s3-policy`
 
-The bucket contents include the two 1 GB files uploaded in earlier.
+**Allowed Actions:**
+- `s3:GetObject` - Read files
+- `s3:PutObject` - Upload files
+- `s3:DeleteObject` - Delete files
+- `s3:ListBucket` - List contents
 
-2. Create a new S3 bucket; follow the naming pattern you used in Part 1, but add a '-2' to the name. Leave other fields as default and click create
+**Resources:**
+- Bucket: `my-app-uploads-2026-tri`
+- Prefixes: `student-profile/*`, `weekly-report-templates/*`
 
-![create bucket](/images/5-Workshop/5.5-Policy/create-bucket.png)
-
-Successfully create bucket
-
-![Success](/images/5-Workshop/5.5-Policy/create-bucket-success.png)
-
-3. Navigate to: Services > VPC > Endpoints, then select the Gateway VPC endpoint you created earlier. Click the Policy tab. Click Edit policy.
-
-![policy](/images/5-Workshop/5.5-Policy/policy1.png)
-
-The default policy allows access to all S3 Buckets through the VPC endpoint.
-
-4. In Edit Policy console, copy & Paste the following policy, then replace yourbucketname-2 with your 2nd bucket name. This policy will allow access through the VPC endpoint to your new bucket, but not any other bucket in Amazon S3. Click Save to apply the policy.
-
-```
+**Policy Document:**
+```json
 {
-  "Id": "Policy1631305502445",
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Stmt1631305501021",
-      "Action": "s3:*",
       "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
       "Resource": [
-      				"arn:aws:s3:::yourbucketname-2",
-       				"arn:aws:s3:::yourbucketname-2/*"
-       ],
-      "Principal": "*"
+        "arn:aws:s3:::my-app-uploads-2026-tri/student-profile/*",
+        "arn:aws:s3:::my-app-uploads-2026-tri/weekly-report-templates/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::my-app-uploads-2026-tri"
     }
   ]
 }
 ```
 
-![custom policy](/images/5-Workshop/5.5-Policy/policy2.png)
+#### Policy 2: RDS Database Access Policy
 
-Successfully customize policy
+**Policy Name:** `internship-app-rds-policy`
 
-![success](/static/images/5-Workshop/5.5-Policy/success.png)
+**Allowed Actions:**
+- `rds-db:connect` - Connect to database
 
-5. From your session on the Test-Gateway-Endpoint instance, test access to the S3 bucket you created in Part 1: Access S3 from VPC
+**Resources:**
+- RDS instance: `internship-db`
+
+**Policy Document:**
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "rds-db:connect",
+      "Resource": "arn:aws:rds:ap-southeast-1:123456789012:db:internship-db"
+    }
+  ]
+}
 ```
-aws s3 ls s3://<yourbucketname>
+
+#### Policy 3: CloudWatch Logging Policy
+
+**Policy Name:** `internship-app-logs-policy`
+
+**Allowed Actions:**
+- `logs:CreateLogGroup`
+- `logs:CreateLogStream`
+- `logs:PutLogEvents`
+
+**Resources:**
+- Log group: `/aws/internship-app/*`
+
+**Policy Document:**
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:ap-southeast-1:123456789012:log-group:/aws/internship-app/*"
+    }
+  ]
+}
 ```
 
-This command will return an error because access to this bucket is not permitted by your new VPC endpoint policy:
+#### Policy 4: SNS Notification Policy
 
-![error](/static/images/5-Workshop/5.5-Policy/error.png)
+**Policy Name:** `internship-app-sns-policy`
 
-6. Return to your home directory on your EC2 instance ` cd~ `
+**Allowed Actions:**
+- `sns:Publish` - Send notifications
 
-+ Create a file ```fallocate -l 1G test-bucket2.xyz ```
-+ Copy file to 2nd bucket ```aws s3 cp test-bucket2.xyz s3://<your-2nd-bucket-name>```
+**Resources:**
+- Topic: `internship-system-notifications`
 
-![success](/static/images/5-Workshop/5.5-Policy/test2.png)
+**Policy Document:**
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "sns:Publish",
+      "Resource": "arn:aws:sns:ap-southeast-1:123456789012:internship-system-notifications"
+    }
+  ]
+}
+```
 
-This operation succeeds because it is permitted by the VPC endpoint policy.
+#### Creating Policies
 
-![success](/static/images/5-Workshop/5.5-Policy/test2-success.png)
+**Step-by-Step Process:**
 
-+ Then we test access to the first bucket by copy the file to 1st bucket `aws s3 cp test-bucket2.xyz s3://<your-1st-bucket-name>`
+1. **Create Policy in IAM Console:**
+   - Open AWS Console → IAM → Policies
+   - Click Create policy
+   - Choose JSON tab
+   - Paste policy document
+   - Click Next
+   - Enter policy name
+   - Click Create policy
 
-![fail](/static/images/5-Workshop/5.5-Policy/test2-fail.png)
+2. **Attach Policy to User:**
+   - Go to IAM Users
+   - Select user (internship-app)
+   - Click Add permissions
+   - Choose Attach policies directly
+   - Search and select policies
+   - Click Attach policies
 
-This command will return an error because access to this bucket is not permitted by your new VPC endpoint policy.
+#### Policies for Each User
 
-#### Part 3 Summary:
+**internship-app User:**
+- Attach: `internship-app-s3-policy`
+- Attach: `internship-app-rds-policy`
+- Attach: `internship-app-logs-policy`
+- Attach: `internship-app-sns-policy`
 
-In this section, you created a VPC endpoint policy for Amazon S3, and used the AWS CLI to test the policy. AWS CLI actions targeted to your original S3 bucket failed because you applied a policy that only allowed access to the second bucket you created. AWS CLI actions targeted for your second bucket succeeded because the policy allowed them. These policies can be useful in situations where you need to control access to resources through VPC endpoints.
+**internship-admin User:**
+- Attach: AWS managed policy `AdministratorAccess`
 
+#### Validating Policies
 
+**Using IAM Policy Simulator:**
+
+1. Open IAM Console → Policy Simulator
+2. Select User/Role
+3. Select Action (e.g., s3:GetObject)
+4. Enter Resource ARN
+5. Click Simulate
+
+**Expected Results:**
+- internship-app `s3:GetObject` on `s3://my-app-uploads-2026-tri/student-profile/*` → Allowed ✓
+- internship-app `s3:GetObject` on `s3://other-bucket/*` → Denied ✓
+- internship-admin S3 actions → Allowed ✓
+
+#### Results and Status
+
+✓ S3 access policy created
+✓ RDS access policy created
+✓ CloudWatch logging policy created
+✓ SNS publish policy created
+✓ Policies attached to users
+✓ All policies tested and validated
+✓ Principle of least privilege enforced
+
+#### Security Best Practices
+
+1. **Least Privilege** - Minimum permissions needed
+2. **Resource Restrictions** - Access limited to specific resources
+3. **Action Restrictions** - Only necessary actions allowed
+4. **Audit Logging** - All actions logged in CloudTrail
+5. **Regular Review** - Quarterly policy audits
+
+#### Suggested Enhancements
+
+1. **Condition-Based Access** - Add IP restrictions
+2. **Resource Tags** - Use for fine-grained control
+3. **Access Analyzer** - Find unused permissions
+4. **Policy Review** - Quarterly updates
+5. **Cross-Account Access** - If needed
+
+#### Conclusion
+
+IAM policies provide secure, fine-grained access control for the internship management system. By implementing the principle of least privilege, the system maintains security while enabling necessary operations for both users and applications.

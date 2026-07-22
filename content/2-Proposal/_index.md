@@ -1,115 +1,118 @@
 ---
 title: "Proposal"
-date: 2024-01-01
+date: 2026-07-01
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+# Internship Management System
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+## A Flexible Cloud Computing Solution for Internship Management
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+
+The Internship Management System is designed to enhance connectivity efficiency and manage workflow progress for the FCAJ internship program. The platform provides a decoupled architecture between a static interface (hosted on S3) and a dynamic processing flow (EC2), distributed globally via the CloudFront network. The project leverages AWS infrastructure services to deliver high availability with a Multi-AZ architecture, while optimizing network costs by using a VPC Endpoint instead of a NAT Gateway for report document upload tasks.
 
 ### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+_Current Problem_  
+The current intern management process faces many limitations in tracking progress, assigning tasks, and evaluating results. The lack of a centralized system easily leads to data errors, difficulties in synchronizing information, and creates major obstacles for management as well as communication between mentors and interns.
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+_The Solution_  
+Build a centralized system on AWS to handle traffic flexibly by separating the static flow (S3 frontend) and dynamic flow (ALB forwarding to EC2). Protect the web application with a WAF firewall at the network edge. Optimize periodic report submissions by granting direct permissions via Presigned URLs and internal routing through a VPC Endpoint.
+
+_Benefits and Return on Investment (ROI)_  
+The solution creates a transparent and clear interactive environment, helping to optimize the information exchange process and proactively discuss work. The system automates the progress tracking flow, supporting significant savings in manual operation time. The architectural design ensures the system operates smoothly while strictly adhering to the limited budget allocated for students.
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+The system is built on the AWS platform, using an independent virtual network space architecture with the IP range 10.0.0.0/16. This space is intricately partitioned into public and private subnets spanning across two availability zones to ensure high security, flexibility, and redundancy.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![Tran Thi Hien](/images/platform_architecture.jng)
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+_AWS Services Used_
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+- _Security and Distribution_: AWS WAF, Amazon CloudFront.
+- _Compute and Load Balancing_: Amazon EC2, Auto Scaling Group, Application Load Balancer.
+- _Storage and Database_: Amazon S3 (Frontend & PDF Reports), Amazon RDS MySQL.
+- _Networking and Identity_: Amazon VPC, VPC Endpoint for S3, Security Group, IAM Role, AWS Secrets Manager.
+- _System Monitoring_: Amazon CloudWatch, Amazon SNS.
+
+_Component Design_
+
+- _Interface and Access_: User connections are securely encrypted via HTTPS. CloudFront combined with the WAF firewall helps distribute static content from the S3 Frontend at high speeds and prevents malicious access from the network edge.
+- _Dynamic Flow Processing_: Business requests pass through the Internet Gateway to the Application Load Balancer, then are intelligently routed to EC2 instances located within the auto-scaling group.
+- _Secure File Upload Flow_: When a report submission operation occurs, EC2 will retrieve information from Secrets Manager to generate a Presigned URL. The PDF file is then pushed directly to S3 via the internal VPC Endpoint network, helping to optimize costs and enhance security.
+- _Core Data Storage_: Intern information is managed by an RDS MySQL database cluster deployed in a multi-zone model situated entirely within the private network, completely isolated from the outside.
+- _Monitoring System_: CloudWatch continuously collects operational metrics; if there is a risk or overload, an Alarm will automatically trigger SNS to send warning emails immediately to the operations team.
 
 ### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+_Implementation Phases_  
+The project implementation process is continuous and divided into 4 main phases, adhering to the schedule from April 17, 2026, to July 12, 2026:
+
+1.  _Research and Architecture Design_: Explore foundational AWS services, sketch the overall system architecture, and design the VPC virtual network space (Month 4).
+2.  _Cost Calculation, Feasibility Check, and Infrastructure Construction_: Evaluate the feasibility of the solution and estimate infrastructure costs to ensure strict adherence to the budget limit. Concurrently, proceed with deploying compute components (Application Load Balancer, Auto Scaling Group, EC2) (Month 5).
+3.  _Architecture Adjustment for Cost/Solution Optimization_: Integrate the RDS database system, set up the VPC Endpoint, and refine the file upload flow using Presigned URLs (Month 6).
+4.  _Development, Testing_: Integrate the CloudFront content delivery network, WAF firewall, set up the CloudWatch monitoring system, and conduct comprehensive testing before handover (Month 7).
+
+_Technical Requirements_
+
+- _Network Infrastructure and Security_: Establish a VPC that complies with multi-layer security principles, with separated Public and Private Subnets. Apply AWS WAF at the network edge to filter malicious traffic. Accounts and services must be granted the principle of least privilege via IAM Roles, while database connection credentials must be securely managed in AWS Secrets Manager.
+- _Servers and Databases_: The dynamic processing application on Amazon EC2 must be configured with an Auto Scaling Group to automatically adjust flexibly according to load. The RDS (MySQL) relational database management system requires precise table schema design, strict foreign key constraints, and must be configured with Multi-AZ to ensure fault tolerance.
+- _Storage and Distribution_: The static web interface is hosted in an S3 bucket and distributed at high speed via Amazon CloudFront. For the PDF document submission feature, the system must use the mechanism of generating Presigned URLs from EC2 and route the upload flow through a VPC Endpoint to optimize internal network bandwidth, avoiding reliance on the public Internet.
 
 ### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+
+- _Pre-Internship (Month 0)_: 1 month for planning and evaluating the old station.
+- _Internship (Months 4–7)_:
+  - Month 4: Focus on learning fundamental knowledge of cloud computing platforms.
+  - Month 5: Transition to advanced modules on AWS infrastructure systems.
+  - Month 6: Continue the learning process while brainstorming system architecture and beginning the implementation of several core features.
+  - Month 7: Continue implementation, finalize remaining features, and conduct comprehensive system testing.
 
 ### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+_Infrastructure Costs_
 
-Total: $0.7/month, $8.40/12 months
+- Amazon EC2: $20.81/month (02 EC2 t3.micro, Linux, 730 hours).
+- Amazon EBS gp3: $0.00/month (02 gp3 volumes, 8 GB/volume, no Snapshot).
+- Application Load Balancer: $18.50/month (01 ALB, 2 new connections/second, 5 requests/second).
+- Public IPv4: $7.30/month (02 Public IPv4 addresses).
+- Amazon RDS MySQL: $38.00/month (db.t3.micro, Multi-AZ, On-Demand).
+- Amazon RDS Storage: $5.50/month (20 GB General Purpose SSD gp3).
+- Amazon S3 Standard: $0.25/month (10 GB storage, 5,000 PUT, 10,000 GET requests).
+- Amazon CloudFront: $0.00/month (10 GB data transfer, 100,000 HTTPS requests).
+- AWS WAF: $8.00/month (01 Web ACL, 03 Rules, 100,000 requests).
+- AWS Secrets Manager: $0.40/month (01 Secret).
+- Amazon CloudWatch: $0.00/month (05 Alarms, low usage Metrics and Logs).
+- Amazon SNS: $0.00/month (100 email notifications).
+- Amazon S3 Gateway Endpoint: $0.00/month (01 Gateway Endpoint).
+- IAM Role, Security Group, Amazon VPC, Subnet, and Internet Gateway: $0.00/month.
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+- Total: ~$98.76/month.
 
 ### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+_Risk Matrix_
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+- Database connection failure: High impact, low probability.
+- Credential leakage error: Severe impact, low probability.
+- Traffic bottleneck: Medium impact, low probability.
+
+_Mitigation Strategies_
+
+- Database: Apply the Standby architecture of Multi-AZ RDS for failover readiness.
+- Security: Centralize storage in AWS Secrets Manager combined with the principle of least privilege via IAM Roles for EC2 instances.
+- Traffic: Automatically scale load using Auto Scaling Group and Application Load Balancer.
+
+_Contingency Plans_
+
+- Set up an automated CloudWatch alert system via SNS to send emails to administrators for timely intervention when anomalies are detected.
 
 ### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+
+_Technical Improvements_: The system operates smoothly with high availability, strict multi-layered security, and complete automation of resource monitoring and static file storage flows.
+
+_Long-term Value_: Successfully build a professional management platform for the internship program, enhance teamwork efficiency, and create favorable conditions for students to effectively apply specialized cloud computing knowledge in practice.

@@ -24,5 +24,5 @@ pre: " <b> 1.3. </b> "
 * Successfully deployed Application Load Balancer (ALB) for intelligent traffic distribution to EC2 instances. 
 * Understood routing mechanisms, target groups, and how to integrate ALB into the internship management project architecture. 
 * Completed practical labs, ready to put the Node.js backend into a production environment with load balancing.
-<img src="{{ "images/1-Worklog/week3.1.png | relURL }}">
-<img src="{{ "images/1-Worklog/week3.2.png | relURL }}">
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week3.1.png)
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week3.2.png)

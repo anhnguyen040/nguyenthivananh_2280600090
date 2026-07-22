@@ -120,4 +120,5 @@ Solution:
 - Successful AI agent implementation requires strong foundations in architecture, observability, security guardrails, and clear approval mechanisms.
 - Continuous learning, building real-world projects, and contributing to the community are essential for long-term career growth in the AI era.
   
-![Nguyen Thi Van Anh](./images/event3.png)
+
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/event3.png)

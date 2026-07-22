@@ -24,5 +24,5 @@ pre: " <b> 1.5. </b> "
 * Thiết kế được schema database hoàn chỉnh cho hệ thống quản lý thực tập sinh (bảng users, reports, tasks, scores, check-ins). 
 * Kết nối thành công từ EC2 đến RDS trong môi trường private subnet an toàn. 
 * Có khả năng thực hiện các thao tác cơ sở dữ liệu cần thiết cho dự án, sẵn sàng lưu trữ thông tin thực tập sinh.
-<img src="{{ "images/1-Worklog/week5.1.png | relURL }}">
-<img src="{{ "images/1-Worklog/week5.2.png | relURL }}">
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week5.1.png)
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week5.2.png)

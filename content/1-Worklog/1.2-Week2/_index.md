@@ -24,5 +24,6 @@ pre: " <b> 1.2. </b> "
 * Successfully configured CloudFront Distribution for fast, secure content delivery with HTTPS and optimized caching.
 * Understood how to integrate S3 into the project for storing intern report PDFs.
 * Completed practical exercises on file upload and management, ready to support the report submission feature.
-<img src="{{ "images/1-Worklog/week2.png | relURL }}">
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week2.png)
+
 

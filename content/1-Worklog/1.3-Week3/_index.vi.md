@@ -24,5 +24,5 @@ pre: " <b> 1.3. </b> "
 * Có khả năng triển khai Application Load Balancer (ALB) để phân phối traffic thông minh đến các EC2 instances. 
 * Hiểu rõ cơ chế routing, target groups và cách tích hợp ALB vào kiến trúc dự án thực tập sinh. 
 * Hoàn thành các bài lab thực hành, sẵn sàng đưa backend Node.js vào môi trường production với load balancing.
-<img src="{{ "images/1-Worklog/week3.1.png | relURL }}">
-<img src="{{ "images/1-Worklog/week3.2.png | relURL }}">
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week3.1.png)
+![Nguyen Thi Van Anh](https://anhnguyen040.github.io/nguyenthivananh_2280600090/images/1-Worklog/week3.2.png)
